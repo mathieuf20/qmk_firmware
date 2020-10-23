@@ -15,10 +15,42 @@ enum layer_number {
   _QWERTY = 0,
   _LOWER,
   _RAISE,
-  _MACROS,
   _SQWERT,
   _RESET
 };
+
+// Qwerty
+#define PARLEFT LSFT(KC_9)
+#define PARRGHT LSFT(KC_0)
+#define CTRLESC MT(MOD_LCTL,KC_ESC)
+#define GOLOWER MO(_LOWER)
+#define GORAISE MO(_RAISE)
+
+// Sqwerty
+#define GREATER ALGR(KC_DOT)
+#define SMALLER ALGR(KC_COMM)
+#define ACUTE_E LSFT(KC_SLSH)
+#define GRAVE_E LSFT(KC_QUOT)
+
+// Lower
+#define SBRKLFT RALT(KC_9)
+#define SBRKRGT RALT(KC_0)
+#define GORESET MO(_RESET)
+#define TILDE   ALGR(KC_RBRC)
+#define RSQWERT LM(_QWERTY, MOD_RSFT)
+#define SHFTENT LSFT(KC_ENT)
+#define APSTRPH LSFT(KC_COMM)
+#define QUOTMRK LSFT(KC_DOT)
+
+// Raise
+#define LSQWERT LM(_QWERTY, MOD_LSFT)
+#define BRKLEFT RALT(KC_7)
+#define BRKRGHT RALT(KC_8)
+#define SHFPSCR S(KC_PSCR)
+#define CTRL_X  LCTL(KC_X)
+#define CTRL_C  LCTL(KC_C)
+#define CTRL_V  LCTL(KC_V)
+#define GOMACRO MO(_MACROS)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* QWERTY
@@ -36,11 +68,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  * ***1: LCTL when held, ESC when tapped
  */
- #define PARLEFT LSFT(KC_9)
- #define PARRGHT LSFT(KC_0)
- #define CTRLESC MT(MOD_LCTL,KC_ESC)
- #define GOLOWER MO(_LOWER)
- #define GORAISE MO(_RAISE)
  [_QWERTY] = LAYOUT(
   KC_GRV ,KC_1   ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,                KC_6   ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_BSPC,\
   KC_TAB ,KC_Q   ,KC_W   ,KC_E   ,KC_R   ,KC_T   ,                KC_Y   ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,KC_MINS,\
@@ -62,10 +89,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
-#define GREATER ALGR(KC_DOT)
-#define SMALLER ALGR(KC_COMM)
-#define ACUTE_E LSFT(KC_SLSH)
-#define GRAVE_E LSFT(KC_QUOT)
 [_SQWERT] = LAYOUT( \
   _______,_______,_______,_______,_______,_______,                _______,_______,_______,_______,_______,_______,\
   _______,S(KC_Q),S(KC_W),S(KC_E),S(KC_R),S(KC_T),                S(KC_Y),S(KC_U),S(KC_I),S(KC_O),S(KC_P),_______,\
@@ -87,14 +110,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
-#define SBRKLFT RALT(KC_9)
-#define SBRKRGT RALT(KC_0)
-#define GORESET MO(_RESET)
-#define TILDE   ALGR(KC_RBRC)
-#define RSQWERT LM(_QWERTY, MOD_RSFT)
-#define SHFTENT LSFT(KC_ENT)
-#define APSTRPH LSFT(KC_COMM)
-#define QUOTMRK LSFT(KC_DOT)
 [_LOWER] = LAYOUT( \
   GORESET,_______,_______,_______,_______,_______,                _______,_______,_______,_______,KC_PSCR,KC_DEL ,\
   KC_F1  ,KC_F2  ,KC_F3  ,KC_F4  ,KC_F5  ,KC_F6  ,                KC_F7  ,KC_F8  ,KC_F9  ,KC_F10 ,KC_F11 ,KC_F12 ,\
@@ -108,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |                    | Vol+ | HOME | PgDn | PgUp | END  |Ctrl+C|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |   <  |  >   |-------.    ,-------| Vol- | Left | Down |  Up  | Right|Ctrl+X|
+ * |      |      |      |      |      |      |-------.    ,-------| Vol- | Left | Down |  Up  | Right|Ctrl+X|
  * |------+------+------+------+------+------|   {   |    |    }  |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|   "  |   -  |   =  |   ¨  |   Ç  |   À  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -116,18 +131,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
-#define LSQWERT LM(_QWERTY, MOD_LSFT)
-#define BRKLEFT RALT(KC_7)
-#define BRKRGHT RALT(KC_8)
-#define SHFPSCR S(KC_PSCR)
-#define CTRL_X  LCTL(KC_X)
-#define CTRL_C  LCTL(KC_C)
-#define CTRL_V  LCTL(KC_V)
-#define GOMACRO MO(_MACROS)
 [_RAISE] = LAYOUT( \
   _______,_______,_______,_______,KC_EQL ,GREATER,                KC_MUTE,KC_MPRV,KC_MPLY,KC_MNXT,SHFPSCR,CTRL_V ,\
   _______,_______,_______,_______,_______,_______,                KC_VOLU,KC_HOME,KC_PGDN,KC_PGUP,KC_END ,CTRL_C ,\
-  _______,_______,_______,_______,SMALLER,GREATER,                KC_VOLD,KC_LEFT,KC_DOWN,KC_UP  ,KC_RGHT,CTRL_X ,\
+  _______,_______,_______,_______,_______,_______,                KC_VOLD,KC_LEFT,KC_DOWN,KC_UP  ,KC_RGHT,CTRL_X ,\
   _______,_______,_______,_______,_______,_______,BRKLEFT,BRKRGHT,QUOTMRK,KC_MINS,KC_EQL ,KC_LCBR,KC_RCBR,KC_PIPE,\
                           GOMACRO,_______,_______,_______,_______,_______,KC_DEL ,KC_RCTL\
 ),
