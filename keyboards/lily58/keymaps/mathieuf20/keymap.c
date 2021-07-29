@@ -19,7 +19,8 @@ enum layer_number {
   _DIGITS,
   _SQWERT,
   _LYRCTL,
-  _GAME
+  _GAME,
+  _DOFUS
 };
 
 // Qwerty
@@ -64,7 +65,23 @@ enum layer_number {
 // Layers
 #define DF_GAME DF(_GAME)
 #define DF_QWER DF(_QWERTY)
+#define DF_DOFU DF(_DOFUS)
 #define BSPLCTL LT(_LYRCTL, KC_BSPC)
+
+// TTYs
+#define CTLALT1 LCTL(LALT(KC_F1))
+#define CTLALT2 LCTL(LALT(KC_F2))
+#define CTLALT3 LCTL(LALT(KC_F3))
+#define CTLALT4 LCTL(LALT(KC_F4))
+#define CTLALT5 LCTL(LALT(KC_F5))
+#define CTLALT6 LCTL(LALT(KC_F6))
+#define CTLALT7 LCTL(LALT(KC_F7))
+#define CTLALT8 LCTL(LALT(KC_F8))
+#define CTLALT9 LCTL(LALT(KC_F9))
+#define CTLALT0 LCTL(LALT(KC_F10))
+
+// Dofus
+#define CTRL_S  LCTL(KC_S)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_GAME] = LAYOUT( \
@@ -73,6 +90,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                KC_ESC ,KC_A   ,KC_S   ,KC_D   ,KC_F   ,KC_G   ,\
   XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,KC_LSFT,KC_LSFT,KC_Z   ,KC_X   ,KC_C   ,KC_V   ,KC_SPC ,\
                           XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,KC_LCTL,KC_SPC ,KC_BSPC,DF_QWER\
+),
+[_DOFUS] = LAYOUT( \
+  DF_QWER,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                KC_6   ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,XXXXXXX,\
+  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                KC_GRV ,KC_1   ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,\
+  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                CTRL_S ,KC_LEFT,KC_DOWN,KC_UP  ,KC_RGHT,KC_PGUP,\
+  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,KC_M   ,KC_Z   ,KC_L   ,KC_Y   ,S(KC_5),S(KC_2),KC_PGDN,\
+                          XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,KC_ENT ,KC_LCTL,KC_BSPC,S(KC_4)\
 ),
 /* QWERTY
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -146,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------| Vol- | Left | Down |  Up  | Right|Ctrl+X|
  * |------+------+------+------+------+------|   {   |    |    }  |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|   ~  |   -  |   =  |   ¨  |   Ç  |   À  |
+ * |      |      |      |      |      |      |-------|    |-------|   ~  | RGUI |   =  |   ¨  |   Ç  |   À  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /DIGITS /       \ Enter\  |RAISE |DELETE| RCTL |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -156,16 +180,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD,TILDE  ,_______,_______,KC_EQL ,GREATER,                KC_MUTE,KC_MPRV,KC_MPLY,KC_MNXT,SHFPSCR,CTRL_V ,\
   _______,_______,_______,_______,_______,_______,                KC_VOLU,KC_HOME,KC_PGDN,KC_PGUP,KC_END ,CTRL_C ,\
   _______,_______,_______,_______,_______,_______,                KC_VOLD,KC_LEFT,KC_DOWN,KC_UP  ,KC_RGHT,CTRL_X ,\
-  _______,_______,_______,_______,_______,_______,BRKLEFT,BRKRGHT,TILDE  ,KC_MINS,KC_EQL ,KC_LCBR,KC_RCBR,KC_PIPE,\
+  _______,_______,_______,_______,_______,_______,BRKLEFT,BRKRGHT,TILDE  ,KC_RGUI,KC_EQL ,KC_LCBR,KC_RCBR,KC_PIPE,\
                           _______,GOVIRT1,_______,GOVIRT1,_______,_______,KC_DEL ,KC_RCTL\
 ),
 /* DIGITS
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |      | TTY1 | TTY2 | TTY3 | TTY4 | TTY5 |                    | TTY6 | TTY7 | TTY8 | TTY9 | TTY0 |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |   1  |   2  |   3  |   4  |   5  |-------.    ,-------|   6  |   7  |   8  |   9  |   0  |      |
+ * |   /  |   1  |   2  |   3  |   4  |   5  |-------.    ,-------|   6  |   7  |   8  |   9  |   0  |   ~  |
  * |------+------+------+------+------+------|   «   |    |   »   |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -175,15 +199,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_DIGITS] = LAYOUT( \
   _______,_______,_______,_______,_______,_______,                _______,_______,_______,_______,_______,_______,\
-  _______,_______,_______,_______,_______,_______,                _______,_______,_______,_______,_______,_______,\
-  _______,KC_1   ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,                KC_6   ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,_______,\
+  _______,CTLALT1,CTLALT2,CTLALT3,CTLALT4,CTLALT5,                CTLALT6,CTLALT7,CTLALT8,CTLALT9,CTLALT0,_______,\
+  KC_GRV ,KC_1   ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,                KC_6   ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,TILDE  ,\
   _______,_______,_______,_______,_______,_______,FRGUILL,FRGUILR,_______,_______,_______,_______,_______,_______,\
                           _______,_______,_______,_______,_______,_______,_______,_______\
 ),
 [_LYRCTL] = LAYOUT( \
   _______,_______,_______,_______,_______, RESET ,                _______,_______,_______,_______,_______,_______,\
   _______,_______,_______,_______,_______,_______,                _______,_______,_______,_______,_______,_______,\
-  _______,_______,_______,_______,_______,_______,                _______,_______,_______,_______,_______,_______,\
+  _______,_______,_______,DF_DOFU,_______,_______,                _______,_______,_______,_______,_______,_______,\
   _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,\
                           _______,_______,_______,_______,_______,_______,_______,DF_GAME\
 )
@@ -222,11 +246,11 @@ void oled_task_user(void) {
     //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
   	//oled_write_ln(read_host_led_state(), false);
     //oled_write_ln(read_timelog(), false);
-	  //oled_write(read_logo(), false);
-    print_hydra_logo();
+	  oled_write(read_logo(), false);
+    //print_sherweb_logo();
   } else {
-    //oled_write(read_logo(), false);
-    print_sherweb_logo();
+    //print_sherweb_logo();
+    oled_write(read_logo(), false);
   }
 }
 #endif // OLED_DRIVER_ENABLE
@@ -236,7 +260,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef OLED_DRIVER_ENABLE
     //set_keylog(keycode, record);
 #endif
-    // set_timelog();
+    //set_timelog();
   }
 
   return true;
