@@ -1,4 +1,4 @@
-/* Copyright 2018 Jason Williams (Wilba)
+/* Copyright 2020 Harrison Chan (Xelus)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,5 +14,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Nothing to see here, move along... ;-)
+#include "quantum.h"
 
+void keyboard_pre_init_kb(void) {
+    gpio_set_pin_output(D1);
+
+    keyboard_pre_init_user();
+}
+
+layer_state_t layer_state_set_kb(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+      case 1:
+        gpio_write_pin_high(D1);
+        break;
+      default: //  for any other layers, or the default layer
+        gpio_write_pin_low(D1);
+        break;
+      }
+    return layer_state_set_user(state);
+}
